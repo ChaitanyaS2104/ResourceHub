@@ -3,7 +3,6 @@ import Provider from "./components/Provider";
 import Navbar from "./components/Navbar";
 
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 
 export const metadata = {
   title: "ResourceHub",
@@ -11,16 +10,16 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
 
   return (
     <html lang="en">
       <body>
-        <Provider session={session}>
+        <Provider>
           <div className="main">
             <div className="gradient" />
           </div>
-          <main>
+          <main className="app">
             <Navbar />
             {children}
           </main>

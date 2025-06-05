@@ -13,8 +13,6 @@ export const connectToDB = async () => {
         //Connect to mongodb if not already
         await mongoose.connect(process.env.MONGODB_URI, {
             dbName: "ResourceHub",
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
         })
         isConnected = true;
         console.log("MongoDB connected")
