@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bootstrap": "^5.3.6",
     "jquery": "^3.7.1",
     "mongodb": "^6.16.0",
     "mongoose": "^8.15.1",
@@ -16,6 +17,7 @@
     "next-auth": "^4.24.11",
     "postcss": "^8.5.4",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^19.0.0",
     "react-select": "^5.10.1",
     "select2": "^4.1.0-rc.0"

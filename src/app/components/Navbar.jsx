@@ -23,7 +23,7 @@ const Navbar = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   return (
-    <nav className="flex-between mb-16 w-full pt-3 p-5">
+    <nav className="flex-between md:mb-16 sm:mb-4 w-full pt-3 p-5">
       <Link href="/" className="flex gap-2 flex-center">
         <Image
           src="/assets/images/files.png"
@@ -32,7 +32,7 @@ const Navbar = () => {
           height={45}
           className="object-contain bg-[#facc15] rounded-full p-1"
         />
-        <p className="logo_text">ResourceHub</p>
+        <p className="logo_text no-underline">ResourceHub</p>
       </Link>
       {/* Desktop navigation */}
       <div className="md:flex hidden">

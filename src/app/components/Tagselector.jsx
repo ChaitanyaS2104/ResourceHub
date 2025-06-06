@@ -7,7 +7,7 @@ const animatedComponents = makeAnimated();
 
 const options = [
   // Personal
-  { value: "personal-growth", label: "Personal Growth" },
+  { value: "personal-growth ", label: "Personal Growth" },
   { value: "health-wellness", label: "Health & Wellness" },
   { value: "travel-lifestyle", label: "Travel & Lifestyle" },
   { value: "psychology-mindset", label: "Psychology & Mindset" },
@@ -68,9 +68,9 @@ const Tagselector = () => {
         defaultValue={selectedOptions}
         isMulti
         options={options}
-        className="w-2xs italic text-sm"
+        className="max-w-md w-full text-sm"
         onChange={setSelectedOptions}
-        placeholder="Select or create tags..."
+        placeholder="Add tags..."
 
       />
     ) : null

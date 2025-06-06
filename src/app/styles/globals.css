@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-nav{
+nav {
   font-family: monospace;
 }
 .gradient {
@@ -65,7 +65,7 @@ nav{
   color: white;
   text-align: center;
   font-size: 0.875rem;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,7 +86,7 @@ nav{
   color: black;
   text-align: center;
   font-size: 0.875rem;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,7 +153,7 @@ nav{
   padding: 0.625rem 3rem 0.625rem 1.25rem;
   font-size: 0.875rem;
   font-weight: 500;
-  font-family: 'Satoshi', sans-serif;
+  font-family: "Satoshi", sans-serif;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
   outline: none;
 }
@@ -224,7 +224,6 @@ nav{
   padding: 4px 15px;
   font-size: 0.875rem;
   color: #6b7280;
-  outline: none;
   border: 1px solid #c7c7c7;
   background-color: rgb(255, 255, 255);
 }
@@ -244,7 +243,7 @@ nav{
 }
 
 .logo_text {
-  font-family: 'Satoshi', sans-serif;
+  font-family: "Satoshi", sans-serif;
   font-weight: 600;
   font-size: 1.125rem;
   color: black;
@@ -269,13 +268,13 @@ nav{
 
 .dropdown_link {
   font-size: 0.875rem;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   color: #374151;
   font-weight: 500;
   transition: color 0.3s;
 }
 
-.mobile_menu:active{
+.mobile_menu:active {
   transform: scale(0.8);
   transition: transform ease-in-out 0.1s;
 }
@@ -326,3 +325,36 @@ nav{
   justify-content: space-between;
   align-items: center;
 }
+
+.uploader_img {
+  background: linear-gradient(to right, #2564eb, #06b5d4);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.343);
+}
+.uploader_img:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.343);
+  transform: scale(0.95);
+}
+
+.glassmorphism_btn {
+  padding: 20px;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 10px -50px 94px rgba(199, 199, 199, 0.2);
+}
+
+@media (max-width: 974px) {
+  .glassmorphism_btn {
+  padding: 16px;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 10px -50px 94px rgba(199, 199, 199, 0.2);
+}
+}
+.resource_preview{
+  border: 1px solid #c7c7c7;
+}
+
