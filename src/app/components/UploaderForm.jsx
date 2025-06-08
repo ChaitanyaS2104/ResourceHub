@@ -1,5 +1,18 @@
+"use client";
+import VideoLinkPreview from "./VideoLinkPreview";
+import AudioPreview from "./AudioPreview";
+import WebsiteView from "./WebsiteView";
 
-const UploaderForm = ({show, type, setShow}) => {
+import { useState } from "react";
+
+const UploaderForm = ({ show, type, setShow, setAll_resources }) => {
+  const [url, setUrl] = useState("");
+
+  const handleAdd = ({res_name, res_link, description, owner, res_type}) => {
+    setAll_resources((prevRes) => {
+      return [...prevRes, { res_name, res_link, description, owner, res_type}];
+    });
+  };
 
   return (
     <>
@@ -8,7 +21,10 @@ const UploaderForm = ({show, type, setShow}) => {
         <div className="fixed inset-0 z-50 flex items-center justify-center glassmorphism">
           <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6 relative">
             <button
-              onClick={() => setShow(false)}
+              onClick={() => {
+                setShow(false);
+                setUrl("");
+              }}
               className="absolute top-3 right-3 outline_btn hover:text-gray-800"
             >
               X
@@ -16,20 +32,17 @@ const UploaderForm = ({show, type, setShow}) => {
 
             <h2 className="text-2xl font-bold mb-2">Upload {type}</h2>
             <div className="border-t border-[#c7c7c7] mb-4"></div>
-            
+
             {/* Form & Preview Section */}
             <div className="flex flex-col gap-5 lg:flex-row">
-              <div
-                className="flex flex-col gap-4 w-full max-w-md"
-              >
-
+              <div className="flex flex-col gap-4 w-full max-w-md">
                 <div>
                   <label className="block font-semibold text-gray-700 mb-1">
                     Resource Name
                   </label>
                   <input
                     type="text"
-                    name="name"
+                    id="res_name"
                     required
                     className="form_input"
                   />
@@ -41,9 +54,13 @@ const UploaderForm = ({show, type, setShow}) => {
                   </label>
                   <input
                     type="url"
-                    name="link"
+                    id="res_link"
+                    placeholder="Paste the link here"
                     required
                     className="form_input"
+                    onChange={(e) => {
+                      setUrl(e.target.value);
+                    }}
                   />
                 </div>
 
@@ -52,7 +69,7 @@ const UploaderForm = ({show, type, setShow}) => {
                     Description
                   </label>
                   <textarea
-                    name="description"
+                    id="description"
                     rows="4"
                     className="form_input"
                   ></textarea>
@@ -64,15 +81,14 @@ const UploaderForm = ({show, type, setShow}) => {
                   </label>
                   <input
                     type="text"
-                    name="owner"
+                    id="owner"
                     required
                     className="form_input"
                   />
                 </div>
               </div>
-
-              <div className="resource_preview rounded-md p-4 w-full max-w-md">
-                <p className="text-gray-500 text-sm">Preview</p>
+              <div className="resource_preview rounded-md p-4 w-full max-w-sm">
+                <WebsiteView url={url} setUrl={setUrl} />
               </div>
             </div>
 
@@ -80,6 +96,19 @@ const UploaderForm = ({show, type, setShow}) => {
               <button
                 type="submit"
                 className="black_btn w-full"
+
+                //Appending the resource to an array
+                onClick={() => {
+                  const res_name = document.getElementById("res_name").value;
+                  const res_link = document.getElementById("res_link").value;
+                  const description =
+                    document.getElementById("description").value;
+                  const owner = document.getElementById("owner").value;
+                  const res_type = type
+                  handleAdd({res_name, res_link, description, owner, res_type})
+                  setShow(false);
+                  setUrl("");
+                }}
               >
                 Upload Resource
               </button>

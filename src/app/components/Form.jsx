@@ -3,11 +3,14 @@ import Tagselector from "./Tagselector";
 import Uploader from "./Uploader";
 import CollectionSelector from "./CollectionSelector";
 import UploaderForm from "./UploaderForm";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 
 const Form = () => {
   const [show, setShow] = useState(false);
   const [type, setType] = useState(false);
+  //Array to store all the resource data until form is submitted
+  const [all_resources, setAll_resources] = useState([]);
+  
   return (
     <>
       <section className="w-full max-w-full flex-start flex-col">
@@ -59,7 +62,7 @@ const Form = () => {
           </span>
           <Uploader setShow={setShow} setType={setType}/>
         </label>
-        <UploaderForm show={show} type={type} setShow={setShow}/>
+        <UploaderForm show={show} type={type} setShow={setShow} setAll_resources={setAll_resources}/>
 
         </form>
       </section>
