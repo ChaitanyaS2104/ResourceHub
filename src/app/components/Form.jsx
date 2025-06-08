@@ -8,8 +8,16 @@ import { useState, useEffect} from "react";
 const Form = () => {
   const [show, setShow] = useState(false);
   const [type, setType] = useState(false);
-  //Array to store all the resource data until form is submitted
+  //Array to store all the resource data until form is submitted for showing
   const [all_resources, setAll_resources] = useState([]);
+
+  //Array to store all the resource ids for the resource book
+  const [resourceIds, setResourceIds] = useState([]);
+  
+  useEffect(()=>{
+    console.log(resourceIds);
+  }, [resourceIds])
+
   
   return (
     <>
@@ -62,7 +70,7 @@ const Form = () => {
           </span>
           <Uploader setShow={setShow} setType={setType}/>
         </label>
-        <UploaderForm show={show} type={type} setShow={setShow} setAll_resources={setAll_resources}/>
+        <UploaderForm show={show} type={type} setShow={setShow} setAll_resources={setAll_resources} setResourceIds={setResourceIds}/>
 
         </form>
       </section>

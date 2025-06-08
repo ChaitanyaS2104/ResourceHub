@@ -1,16 +1,72 @@
 "use client";
-import VideoLinkPreview from "./VideoLinkPreview";
-import AudioPreview from "./AudioPreview";
 import WebsiteView from "./WebsiteView";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const UploaderForm = ({ show, type, setShow, setAll_resources }) => {
+const UploaderForm = ({ show, type, setShow, setAll_resources, setResourceIds }) => {
   const [url, setUrl] = useState("");
+  const [resName, setResName] = useState("");
+  const [resLink, setResLink] = useState("");
+  const [description, setDescription] = useState("");
+  const [resOwner, setResOwner] = useState("");
 
-  const handleAdd = ({res_name, res_link, description, owner, res_type}) => {
-    setAll_resources((prevRes) => {
-      return [...prevRes, { res_name, res_link, description, owner, res_type}];
+
+  useEffect(() => {
+    if (show) {
+      setResName("");
+      setResLink("");
+      setDescription("");
+      setResOwner("");
+      setUrl("");
+    }
+  }, [show])
+  
+  const postResource = async ({
+    res_name,
+    res_link,
+    description,
+    res_owner,
+    res_type,
+  }) => {
+    const res = await fetch("/api/resource/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        res_name,
+        res_link,
+        description,
+        res_owner,
+        res_type,
+      }),
+    });
+
+    const data = await res.json();
+    setResourceIds((prevIds) => {
+      return [...prevIds, data.id];
+    });
+    console.log(data);
+    return;
+  };
+
+  const handleAdd = async () => {
+    setAll_resources((prevRes) => [
+      ...prevRes,
+      {
+        res_name: resName,
+        res_link: resLink,
+        description,
+        res_owner: resOwner,
+        res_type: type,
+      },
+    ]);
+    await postResource({
+      res_name: resName,
+      res_link: resLink,
+      description,
+      res_owner: resOwner,
+      res_type: type,
     });
   };
 
@@ -45,6 +101,8 @@ const UploaderForm = ({ show, type, setShow, setAll_resources }) => {
                     id="res_name"
                     required
                     className="form_input"
+                    value={resName}
+                    onChange={(e) => setResName(e.target.value)}
                   />
                 </div>
 
@@ -60,6 +118,7 @@ const UploaderForm = ({ show, type, setShow, setAll_resources }) => {
                     className="form_input"
                     onChange={(e) => {
                       setUrl(e.target.value);
+                      setResLink(e.target.value);
                     }}
                   />
                 </div>
@@ -72,6 +131,8 @@ const UploaderForm = ({ show, type, setShow, setAll_resources }) => {
                     id="description"
                     rows="4"
                     className="form_input"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   ></textarea>
                 </div>
 
@@ -84,6 +145,8 @@ const UploaderForm = ({ show, type, setShow, setAll_resources }) => {
                     id="owner"
                     required
                     className="form_input"
+                    value={resOwner}
+                    onChange={(e) => setResOwner(e.target.value)}
                   />
                 </div>
               </div>
@@ -94,18 +157,10 @@ const UploaderForm = ({ show, type, setShow, setAll_resources }) => {
 
             <div className="mt-6">
               <button
-                type="submit"
+                type="button"
                 className="black_btn w-full"
-
-                //Appending the resource to an array
-                onClick={() => {
-                  const res_name = document.getElementById("res_name").value;
-                  const res_link = document.getElementById("res_link").value;
-                  const description =
-                    document.getElementById("description").value;
-                  const owner = document.getElementById("owner").value;
-                  const res_type = type
-                  handleAdd({res_name, res_link, description, owner, res_type})
+                onClick={async () => {
+                  await handleAdd();
                   setShow(false);
                   setUrl("");
                 }}

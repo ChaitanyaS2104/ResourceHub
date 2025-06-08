@@ -2,7 +2,7 @@ import { Schema, model, models } from "mongoose";
 //Id is given by default 
 
 const resource = new Schema({
-  name: {
+  res_name: {
     type: String,
     required: [true, "Resource name title required"],
   },
@@ -13,7 +13,7 @@ const resource = new Schema({
   description: {
     type: String,
   },
-  owner: {
+  res_owner: {
     type: String,
     required: [true, "Resource owner is required"],
   },
