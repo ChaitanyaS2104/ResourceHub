@@ -44,7 +44,7 @@ const UploaderForm = ({ show, type, setShow, setAll_resources, setResourceIds })
 
     const data = await res.json();
     setResourceIds((prevIds) => {
-      return [...prevIds, data.id];
+      return [...prevIds, data._id];
     });
     console.log(data);
     return;

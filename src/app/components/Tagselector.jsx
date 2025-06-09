@@ -52,9 +52,13 @@ const options = [
   { value: "other", label: "Other" },
 ];
 
-const Tagselector = () => {
+const Tagselector = ({setCategory, book}) => {
   const [isClient, setIsClient] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  useEffect(()=>{
+    setCategory({...book, category: selectedOptions.map((tag) => tag.value.trim())})
+  }, [selectedOptions])
 
   useEffect(() => {
     setIsClient(true);

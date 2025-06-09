@@ -13,20 +13,25 @@ const collectionOptions = [
   // Add more predefined collections here
 ];
 
-const CollectionSelector = ({ onChange }) => {
-  const [selected, setSelected] = useState(null);
+const CollectionSelector = ({ onChange, setCollection, book }) => {
+  const [selected, setSelected] = useState("");
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    setCollection({ ...book, collection: selected.value });
+  }, [selected]);
+
   const handleChange = (option) => {
     setSelected(option);
     if (onChange) onChange(option);
   };
 
-  return (
-    isClient? (<CreatableSelect
+  return isClient ? (
+    <CreatableSelect
       isClearable
       components={animatedComponents}
       options={collectionOptions}
@@ -34,7 +39,9 @@ const CollectionSelector = ({ onChange }) => {
       onChange={handleChange}
       placeholder="Add to collection"
       className="max-w-xs text-sm"
-    />):(<>Failed to load</>)
+    />
+  ) : (
+    <>Failed to load</>
   );
 };
 

@@ -83,22 +83,6 @@ const Uploader = ({setShow, setType}) => {
           className="uploader_img glassmorphism_btn"
         />
       </button>
-
-      <button
-        type="button"
-        onClick={() => {
-          setShow(true);
-          setType("file");
-        }}
-      >
-        <Image
-          src="/assets/icons/file-upload.png"
-          width={80}
-          height={60}
-          alt="Upload file"
-          className="uploader_img glassmorphism_btn"
-        />
-      </button>
     </div>
   );
 };
