@@ -5,6 +5,7 @@ import CollectionSelector from "./CollectionSelector";
 import UploaderForm from "./UploaderForm";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Form = ({ handleSubmit, book, setBook, submitting, btntype }) => {
   const [show, setShow] = useState(false);
@@ -107,9 +108,54 @@ const Form = ({ handleSubmit, book, setBook, submitting, btntype }) => {
             setResourceIds={setResourceIds}
           />
         </form>
+        <div className="grid  py-4 gap-1.5 grid-cols-2">
+          {all_resources.map((res) => {
+            return (
+              <SingleResCard
+                key={res.res_name}
+                res={res}
+                onDelete={() => {
+                  setAll_resources(
+                    all_resources.filter((r) => r.res_name !== res.res_name)
+                  );
+                  setResourceIds(resourceIds.filter((id) => id !== res._id));
+                }}
+              />
+            );
+          })}
+        </div>
       </section>
     </>
   );
 };
 
 export default Form;
+
+//To show the currently uploaded resources
+const SingleResCard = ({ res, onDelete }) => {
+  return (
+    <div className="flex justify-between items-start p-3 border rounded-lg glassmorphism w-full max-w-2xl min-w-md position-relative">
+      <div className="space-y-1 flex-1">
+        <h2 className="text-xl font-semibold mb-2">{res.res_name}</h2>
+        <p className="text-gray-700 text-sm">{res.description}</p>
+        <div className="border-b-1 border-[#c7c7c7] w-full"></div>
+        <a
+          href={res.res_link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline text-xs"
+        >
+          {res.res_link}
+        </a>
+        <p className="text-xs text-gray-700 font-semibold">{res.res_owner}</p>
+        <p className="text-xs text-gray-600">Type: {res.res_type}</p>
+      </div>
+      <button
+        onClick={onDelete}
+        className="h-8 px-3 text-sm text-white rounded-full orange_gradient border-1 border-amber-600 cursor-pointer hover:scale-[1.04]"
+      >
+        Remove
+      </button>
+    </div>
+  );
+};
