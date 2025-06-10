@@ -26,7 +26,7 @@ const CreateResoourceBook = () => {
           description: book.description,
           category: book.category,
           resources: book.resources,
-          userId: session?.user.id,
+          creator: session?.user.id,
         }),
       });
 
