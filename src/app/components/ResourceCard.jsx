@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const ResourceCard = ({ res_book, handleBookClick }) => {
   return (
-    <div className="prompt_card flex flex-col gap-4">
+    <div className="prompt_card flex flex-col gap-4 my-3">
       <div className="border-b-1 border-[#c7c7c7]">
         <h2 className="font-satoshi font-semibold text-gray-900 my-3 text-2xl">
           {res_book.title}

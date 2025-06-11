@@ -8,28 +8,21 @@ function getAudioPlatform(url) {
   return "Audio";
 }
 
-const AudioPreview = ({ url, setUrl })=> {
+const AudioPreview = ({ url })=> {
   const platform = getAudioPlatform(url);
-
-   //Clear the previous url
-  useEffect(() => {
-    setUrl("");
-  }, []);
-
 
   // Extract Spotify embed URL
   const getSpotifyEmbedUrl = (url) => {
-    const match = url.match(/open\.spotify\.com\/episode\/([a-zA-Z0-9]+)/);
+    const match = url.match(/open\.spotify\.com\/show\/([a-zA-Z0-9]+)/);
     if (match && match[1]) {
-      return `https://open.spotify.com/embed/episode/${match[1]}?utm_source=generator`;
+      return `https://open.spotify.com/embed/show/${match[1]}?utm_source=generator`;
     }
     return null;
   };
-
   const spotifyEmbedUrl = platform === "Spotify" ? getSpotifyEmbedUrl(url) : null;
 
   return (
-    <div className="p-4 border border-[#c7c7c7] rounded-md max-w-sm w-full bg-gray-50 flex flex-col items-center gap-3">
+    <div className="p-2 border border-[#c7c7c7] rounded-md max-w-xs w-full bg-gray-50 flex flex-col items-center gap-3">
       {platform === "Spotify" && spotifyEmbedUrl ? (
         <iframe
           style={{ borderRadius: "12px" }}
@@ -47,17 +40,6 @@ const AudioPreview = ({ url, setUrl })=> {
             alt={`${platform} icon`}
             className="bg-gray-200 p-9 rounded"
           />
-          <div className="flex flex-col text-center">
-            {platform != "Audio" && <span className="text-sm font-semibold">{platform} Audio</span> }
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 underline break-all"
-            >
-              {url}
-            </a>
-          </div>
         </>
       )}
     </div>

@@ -5,7 +5,10 @@ import CollectionSelector from "./CollectionSelector";
 import UploaderForm from "./UploaderForm";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import VideoLinkPreview from "./not used/VideoLinkPreview";
+import AudioPreview from "./not used/AudioPreview";
+import WebPreview from "./not used/WebPreview";
+import ContactPreview from "./not used/ContactPreview";
 
 const Form = ({ handleSubmit, book, setBook, submitting, btntype }) => {
   const [show, setShow] = useState(false);
@@ -108,7 +111,7 @@ const Form = ({ handleSubmit, book, setBook, submitting, btntype }) => {
             setResourceIds={setResourceIds}
           />
         </form>
-        <div className="grid  py-4 gap-1.5 grid-cols-2">
+        <div className="grid py-4 gap-1.5">
           {all_resources.map((res) => {
             return (
               <SingleResCard
@@ -134,7 +137,14 @@ export default Form;
 //To show the currently uploaded resources
 const SingleResCard = ({ res, onDelete }) => {
   return (
-    <div className="flex justify-between items-start p-3 border rounded-lg glassmorphism w-full max-w-2xl min-w-md position-relative">
+    <div className="flex justify-between items-start p-3 border rounded-lg glassmorphism max-w-4xl position-relative gap-3 lg:flex-row flex-col">
+      <div className="self-center">
+        {res.res_type == "video" && <VideoLinkPreview url={res.res_link}/>}
+        {res.res_type == "audio / podcast" && <AudioPreview url={res.res_link}/>}
+        {res.res_type == "article / blog" && <WebPreview/>}
+        {res.res_type == "social media handle" && <ContactPreview/>}
+        {res.res_type == "website details" && <WebPreview/>}
+      </div>
       <div className="space-y-1 flex-1">
         <h2 className="text-xl font-semibold mb-2">{res.res_name}</h2>
         <p className="text-gray-700 text-sm">{res.description}</p>

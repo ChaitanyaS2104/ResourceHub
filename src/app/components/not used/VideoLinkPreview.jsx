@@ -40,18 +40,11 @@ function getEmbedInfo(url) {
   };
 }
 
-const VideoLinkPreview = ({ url, setUrl }) => {
+const VideoLinkPreview = ({ url }) => {
   const { platform, embedUrl } = getEmbedInfo(url);
 
-  //Clear the previous url
-  useEffect(() => {
-    setUrl("");
-  }, []);
-
   return (
-    <div className="resource_preview rounded-md p-4 w-full max-w-md border bg-white">
-      <p className="text-gray-500 text-sm mb-2">Video Preview ({platform})</p>
-
+    <div className="resource_preview rounded-md p-2 w-full max-w-md border bg-white">
       {embedUrl ? (
         <iframe
           src={embedUrl}
