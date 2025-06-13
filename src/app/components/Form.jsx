@@ -10,20 +10,9 @@ import AudioPreview from "./not used/AudioPreview";
 import WebPreview from "./not used/WebPreview";
 import ContactPreview from "./not used/ContactPreview";
 
-const Form = ({ handleSubmit, book, setBook, submitting, btntype }) => {
+const Form = ({ handleSubmit, book, setBook, submitting, btntype, all_resources, setAll_resources }) => {
   const [show, setShow] = useState(false);
   const [type, setType] = useState(false);
-
-  //Array to store all the resource data until form is submitted for showing
-  const [all_resources, setAll_resources] = useState([]);
-
-  //Array to store all the resource ids for the resource book
-  const [resourceIds, setResourceIds] = useState([]);
-
-  useEffect(() => {
-    console.log(resourceIds);
-    setBook({ ...book, resources: resourceIds });
-  }, [resourceIds]);
 
   useEffect(() => {
     console.log(book);
@@ -108,7 +97,6 @@ const Form = ({ handleSubmit, book, setBook, submitting, btntype }) => {
             type={type}
             setShow={setShow}
             setAll_resources={setAll_resources}
-            setResourceIds={setResourceIds}
           />
         </form>
         <div className="grid py-4 gap-1.5">
@@ -121,7 +109,6 @@ const Form = ({ handleSubmit, book, setBook, submitting, btntype }) => {
                   setAll_resources(
                     all_resources.filter((r) => r.res_name !== res.res_name)
                   );
-                  setResourceIds(resourceIds.filter((id) => id !== res._id));
                 }}
               />
             );

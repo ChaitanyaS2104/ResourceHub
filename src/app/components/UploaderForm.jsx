@@ -3,83 +3,48 @@ import WebsiteView from "./WebsiteView";
 
 import { useEffect, useState } from "react";
 
-const UploaderForm = ({ show, type, setShow, setAll_resources, setResourceIds }) => {
-  const [url, setUrl] = useState("");
-  const [resName, setResName] = useState("");
-  const [resLink, setResLink] = useState("");
-  const [description, setDescription] = useState("");
-  const [resOwner, setResOwner] = useState("");
-
+const UploaderForm = ({ show, type, setShow, setAll_resources }) => {
+  //Store the form input values of resource
+  const [temp_res, setTemp_res] = useState({
+    resName: "",
+    resLink: "",
+    resDescription: "",
+    resOwner: "",
+  });
 
   useEffect(() => {
     if (show) {
-      setResName("");
-      setResLink("");
-      setDescription("");
-      setResOwner("");
-      setUrl("");
+      setTemp_res({
+        resName: "",
+        resLink: "",
+        resDescription: "",
+        resOwner: "",
+      });
     }
-  }, [show])
-  
-  const postResource = async ({
-    res_name,
-    res_link,
-    description,
-    res_owner,
-    res_type,
-  }) => {
-    const res = await fetch("/api/resource/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        res_name,
-        res_link,
-        description,
-        res_owner,
-        res_type,
-      }),
-    });
-
-    const data = await res.json();
-    setResourceIds((prevIds) => {
-      return [...prevIds, data._id];
-    });
-    console.log(data);
-    return;
-  };
+  }, [show]);
 
   const handleAdd = async () => {
     setAll_resources((prevRes) => [
       ...prevRes,
       {
-        res_name: resName,
-        res_link: resLink,
-        description,
-        res_owner: resOwner,
+        res_name: temp_res.resName,
+        res_link: temp_res.resLink,
+        description: temp_res.resDescription,
+        res_owner: temp_res.resOwner,
         res_type: type,
       },
     ]);
-    await postResource({
-      res_name: resName,
-      res_link: resLink,
-      description,
-      res_owner: resOwner,
-      res_type: type,
-    });
   };
 
   return (
     <>
       {/* Showing the form based on the type of resource */}
       {show && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center glassmorphism">
-          <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6 relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center glassmorphism overflow-y-auto">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6 relative my-8 max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => {
                 setShow(false);
-                setUrl("");
               }}
               className="absolute top-3 right-3 outline_btn hover:text-gray-800"
             >
@@ -101,8 +66,13 @@ const UploaderForm = ({ show, type, setShow, setAll_resources, setResourceIds })
                     id="res_name"
                     required
                     className="form_input"
-                    value={resName}
-                    onChange={(e) => setResName(e.target.value)}
+                    value={temp_res.resName}
+                    onChange={(e) =>
+                      setTemp_res((prev) => ({
+                        ...prev,
+                        resName: e.target.value,
+                      }))
+                    }
                   />
                 </div>
 
@@ -117,8 +87,10 @@ const UploaderForm = ({ show, type, setShow, setAll_resources, setResourceIds })
                     required
                     className="form_input"
                     onChange={(e) => {
-                      setUrl(e.target.value);
-                      setResLink(e.target.value);
+                      setTemp_res((prev) => ({
+                        ...prev,
+                        resLink: e.target.value,
+                      }));
                     }}
                   />
                 </div>
@@ -131,8 +103,13 @@ const UploaderForm = ({ show, type, setShow, setAll_resources, setResourceIds })
                     id="description"
                     rows="4"
                     className="form_input"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    value={temp_res.resDescription}
+                    onChange={(e) => {
+                      setTemp_res((prev) => ({
+                        ...prev,
+                        resDescription: e.target.value,
+                      }));
+                    }}
                   ></textarea>
                 </div>
 
@@ -145,13 +122,18 @@ const UploaderForm = ({ show, type, setShow, setAll_resources, setResourceIds })
                     id="owner"
                     required
                     className="form_input"
-                    value={resOwner}
-                    onChange={(e) => setResOwner(e.target.value)}
+                    value={temp_res.resOwner}
+                    onChange={(e) => {
+                      setTemp_res((prev) => ({
+                        ...prev,
+                        resOwner: e.target.value,
+                      }));
+                    }}
                   />
                 </div>
               </div>
               <div className="resource_preview rounded-md p-4 w-full max-w-sm">
-                <WebsiteView url={url} setUrl={setUrl} />
+                <WebsiteView url={temp_res.resLink} setTemp_res={setTemp_res} />
               </div>
             </div>
 
@@ -161,8 +143,13 @@ const UploaderForm = ({ show, type, setShow, setAll_resources, setResourceIds })
                 className="black_btn w-full"
                 onClick={async () => {
                   await handleAdd();
+                  setTemp_res({
+                    resName: "",
+                    resLink: "",
+                    resDescription: "",
+                    resOwner: "",
+                  });
                   setShow(false);
-                  setUrl("");
                 }}
               >
                 Upload Resource

@@ -1,17 +1,14 @@
 'use client'
 import { useEffect, useState } from "react";
 
-const WebsiteView = ({ url, setUrl })=> {
+const WebsiteView = ({ url }) => {
   const [preview, setPreview] = useState(null);
 
-  //Clear the previous url
   useEffect(() => {
-    setUrl("");
-    setPreview('')
-  }, []);
-
-  useEffect(() => {
-    if (!url) return;
+    if (!url) {
+      setPreview(null); // Clear preview if url is empty
+      return;
+    }
     const fetchPreview = async () => {
       const res = await fetch(`/api/LinkPreview/?url=${encodeURIComponent(url)}`);
       const data = await res.json();
@@ -20,6 +17,7 @@ const WebsiteView = ({ url, setUrl })=> {
     fetchPreview();
   }, [url]);
 
+  if (!url) return null; // Don't render anything if url is empty
   if (!preview) return <div>Loading preview...</div>;
 
   return (
@@ -45,5 +43,6 @@ const WebsiteView = ({ url, setUrl })=> {
       </div>
     </a>
   );
-}
+};
+
 export default WebsiteView;
