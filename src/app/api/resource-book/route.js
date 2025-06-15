@@ -11,30 +11,3 @@ export const GET = async(req) => {
     return new Response(`Failed to fetch all the books: ${error}`, {status: 500});
   }
 };
-
-export const POST = async (req) => {
-  const { title, description, category, resources, fromCollection, creator } = await req.json();
-
-  try {
-    await connectToDB();
-
-    //Create new book 
-    const newBook = new ResourceBook({
-      title,
-      description,
-      category,
-      resources,
-      fromCollection,
-      creator,
-    });
-
-    await newBook.save();
-    //Add to collection if specified
-
-
-
-    return new Response(JSON.stringify(newBook), { status: 201 });
-  } catch (error) {
-        return new Response(JSON.stringify(error.message), {status: 400,});
-  }
-};

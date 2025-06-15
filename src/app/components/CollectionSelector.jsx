@@ -13,8 +13,8 @@ const collectionOptions = [
   // Add more predefined collections here
 ];
 
-const CollectionSelector = ({ onChange, setCollection, book }) => {
-  const [selected, setSelected] = useState("");
+const CollectionSelector = ({ onChange, setCollection, book, isEdit }) => {
+  const [selected, setSelected] = useState({});
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -22,8 +22,21 @@ const CollectionSelector = ({ onChange, setCollection, book }) => {
   }, []);
 
   useEffect(() => {
-    setCollection({ ...book, collection: selected.value });
+    setCollection({ ...book, fromCollection: selected.value });
   }, [selected]);
+
+  useEffect(() => {
+    if (isEdit && book?.fromCollection) {
+      const foundOption = collectionOptions.find(
+        (opt) => opt.value === book.fromCollection
+      );
+      setSelected(
+        foundOption || { value: book.fromCollection, label: book.fromCollection }
+      );
+    }
+  }, [isEdit]);
+
+
 
   const handleChange = (option) => {
     setSelected(option);

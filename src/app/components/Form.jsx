@@ -10,7 +10,7 @@ import AudioPreview from "./not used/AudioPreview";
 import WebPreview from "./not used/WebPreview";
 import ContactPreview from "./not used/ContactPreview";
 
-const Form = ({ handleSubmit, book, setBook, submitting, btntype, all_resources, setAll_resources }) => {
+const Form = ({ handleSubmit, book, setBook, submitting, btntype, all_resources, setAll_resources, isEdit }) => {
   const [show, setShow] = useState(false);
   const [type, setType] = useState(false);
 
@@ -43,6 +43,7 @@ const Form = ({ handleSubmit, book, setBook, submitting, btntype, all_resources,
                 onChange={(e) => {
                   setBook({ ...book, title: e.target.value });
                 }}
+                value={book.title}
               />
             </label>
 
@@ -56,6 +57,7 @@ const Form = ({ handleSubmit, book, setBook, submitting, btntype, all_resources,
                 onChange={(e) => {
                   setBook({ ...book, description: e.target.value });
                 }}
+                value={book.description}
               />
             </label>
 
@@ -63,13 +65,13 @@ const Form = ({ handleSubmit, book, setBook, submitting, btntype, all_resources,
               <span className="font-semibold text-base text-gray-700 text-nowrap">
                 Category -
               </span>
-              <Tagselector setCategory={setBook} book={book} />
+              <Tagselector setCategory={setBook} book={book} isEdit={isEdit}/>
             </label>
             <label className="flex gap-2 items-center">
               <span className="font-semibold text-base text-gray-700 text-nowrap">
                 Collection -
               </span>
-              <CollectionSelector setCollection={setBook} book={book} />
+              <CollectionSelector setCollection={setBook} book={book} isEdit={isEdit}/>
             </label>
 
             <div className="flex-end mx-3 mb-5 gap-4">

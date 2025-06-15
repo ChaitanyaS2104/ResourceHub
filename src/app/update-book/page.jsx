@@ -1,14 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@app/components/Form";
-const CreateResoourceBook = () => {
+const EditResourceBook = () => {
   //Array to store all the resource data until form is submitted for showing
   const [all_resources, setAll_resources] = useState([]);
-
-  const { data: session, status } = useSession();
+  const searchParams = useSearchParams();
+  const bookId = searchParams.get("id");
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [book, setBook] = useState({
@@ -16,8 +15,31 @@ const CreateResoourceBook = () => {
     description: "",
     category: [],
     resources: [],
-    collection: "",
+    fromCollection: "",
   });
+
+  const [isEdit, setIsEdit] = useState(false);
+
+  useEffect(() => {
+    const getBookDetails = async () => {
+      const response = await fetch(`api/resource-book/${bookId}`);
+      const data = await response.json();
+      setBook({
+      title: data.title,
+      description: data.description,
+      category: data.category,
+      resources: data.ids,
+      fromCollection: data.fromCollection,
+    });
+    setIsEdit(true);
+    };
+
+    if(bookId) getBookDetails();
+  }, [bookId]);
+
+  useEffect(()=>{
+    console.log(book)
+  }, [book])
 
   const postResource = async (all) => {
     const ids = await Promise.all(
@@ -42,20 +64,20 @@ const CreateResoourceBook = () => {
     return ids;
   };
 
-  const createbook = async (e) => {
+  const updateBook = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    if(!bookId) return alert("Book id not found")
     try {
       const ids = await postResource(all_resources);
-      const res = await fetch("/api/resource-book/new", {
-        method: "POST",
+      const res = await fetch(`/api/resource-book/${bookId}`, {
+        method: "PATCH",
         body: JSON.stringify({
           title: book.title,
           description: book.description,
           category: book.category,
           resources: ids,
           fromCollection: book.collection,
-          creator: session?.user.id,
         }),
       });
 
@@ -71,15 +93,16 @@ const CreateResoourceBook = () => {
 
   return (
     <Form
-      handleSubmit={createbook}
+      handleSubmit={updateBook}
       book={book}
       setBook={setBook}
       submitting={submitting}
-      btntype="Create"
+      btntype="Edit"
       all_resources={all_resources}
       setAll_resources={setAll_resources}
+      isEdit={isEdit}
     />
   );
 };
 
-export default CreateResoourceBook;
+export default EditResourceBook;

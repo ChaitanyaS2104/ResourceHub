@@ -52,7 +52,7 @@ const options = [
   { value: "other", label: "Other" },
 ];
 
-const Tagselector = ({setCategory, book}) => {
+const Tagselector = ({setCategory, book, isEdit}) => {
   const [isClient, setIsClient] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -63,6 +63,17 @@ const Tagselector = ({setCategory, book}) => {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // Load selected tags on mount or when book.category changes
+  useEffect(() => {
+    if (book?.category?.length) {
+      const mappedOptions = book.category.map((cat) => {
+        const existing = options.find((opt) => opt.value === cat.trim());
+        return existing || { value: cat.trim(), label: cat.trim() }; // for custom/created tags
+      });
+      setSelectedOptions(mappedOptions);
+    }
+  }, [isEdit]);
 
   return (
     isClient ? (
@@ -75,7 +86,7 @@ const Tagselector = ({setCategory, book}) => {
         className="max-w-md w-full text-sm"
         onChange={setSelectedOptions}
         placeholder="Add tags..."
-
+        value={selectedOptions}
       />
     ) : null
   );
