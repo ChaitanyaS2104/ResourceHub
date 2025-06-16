@@ -4,9 +4,13 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
-const ResourceCard = ({ res_book, handleBookClick, handleEdit, handleDelete }) => {
-
-  const {data : session} = useSession();
+const ResourceCard = ({
+  res_book,
+  handleEdit,
+  handleDelete,
+  handleBookClick,
+}) => {
+  const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
   return (
@@ -18,10 +22,19 @@ const ResourceCard = ({ res_book, handleBookClick, handleEdit, handleDelete }) =
         <p className="my-3 font-satoshi text-sm text-gray-700 ">
           {res_book.description}
         </p>
+        <button
+          className="text-sm text-blue-500 text-right w-full cursor-pointer"
+          onClick={() => handleBookClick(res_book._id)}
+        >
+          more
+        </button>
       </div>
       <div className="flex gap-1.5">
         {res_book.category.map((category) => (
-          <div className="text-xs rounded-full px-3 py-0.5 bg-gray-200" key={category}>
+          <div
+            className="text-xs rounded-full px-3 py-0.5 bg-gray-200"
+            key={category}
+          >
             <span className="blue_gradient"># {category}</span>
           </div>
         ))}
@@ -47,16 +60,22 @@ const ResourceCard = ({ res_book, handleBookClick, handleEdit, handleDelete }) =
         </div>
       </div>
 
-      {(session?.user.id == res_book.creator._id && pathName === "/profile") && (
+      {session?.user.id == res_book.creator._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
-          <p className="font-inter text-sm green_gradient cursor-pointer" onClick={handleEdit}>
+          <p
+            className="font-inter text-sm green_gradient cursor-pointer"
+            onClick={handleEdit}
+          >
             Edit
           </p>
-          <p className="font-inter text-sm orange_gradient cursor-pointer" onClick={handleDelete}>
+          <p
+            className="font-inter text-sm orange_gradient cursor-pointer"
+            onClick={handleDelete}
+          >
             Delete
           </p>
         </div>
-      ) }
+      )}
     </div>
   );
 };

@@ -22,7 +22,7 @@ const AudioPreview = ({ url })=> {
   const spotifyEmbedUrl = platform === "Spotify" ? getSpotifyEmbedUrl(url) : null;
 
   return (
-    <div className="p-2 border border-[#c7c7c7] rounded-md max-w-xs w-full bg-gray-50 flex flex-col items-center gap-3">
+    <div className="p-2 border border-[#c7c7c7] rounded-md max-w-2xs w-full bg-gray-50 flex flex-col items-center gap-3">
       {platform === "Spotify" && spotifyEmbedUrl ? (
         <iframe
           style={{ borderRadius: "12px" }}
@@ -38,7 +38,7 @@ const AudioPreview = ({ url })=> {
           <img
             src={`/assets/audio-icons/${platform}.svg`}
             alt={`${platform} icon`}
-            className="bg-gray-200 p-9 rounded"
+            className="bg-gray-200 p-9 rounded max-wd-2xs"
           />
         </>
       )}

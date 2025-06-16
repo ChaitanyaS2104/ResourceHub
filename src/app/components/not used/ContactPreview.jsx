@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const ContactPreview = () => {
   return (
-    <div className="rounded-lg shadow-md w-xs glassmorphism object-contain flex justify-center">
+    <div className="rounded-lg shadow-md w-2xs glassmorphism object-contain flex justify-center">
       <Image
       src={`/assets/icons/contact.png`} // Placeholder image, replace with actual URL if needed
       alt="Contact Preview"

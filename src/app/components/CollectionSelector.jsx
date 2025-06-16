@@ -46,6 +46,7 @@ const CollectionSelector = ({ onChange, setCollection, book, isEdit }) => {
   return isClient ? (
     <CreatableSelect
       isClearable
+      isMulti
       components={animatedComponents}
       options={collectionOptions}
       value={selected}
