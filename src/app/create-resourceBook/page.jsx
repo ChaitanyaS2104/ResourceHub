@@ -16,7 +16,7 @@ const CreateResoourceBook = () => {
     description: "",
     category: [],
     resources: [],
-    collection: "",
+    fromCollection: "",
   });
 
   const postResource = async (all) => {
@@ -54,7 +54,7 @@ const CreateResoourceBook = () => {
           description: book.description,
           category: book.category,
           resources: ids,
-          fromCollection: book.collection,
+          fromCollection: book.fromCollection,
           creator: session?.user.id,
         }),
       });

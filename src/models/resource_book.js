@@ -23,8 +23,8 @@ const resource_book = new Schema(
       },
     ],
     fromCollection: {
-      type: String,
-      default :"",
+      type: [String],
+      default: [],
     },
     creator: {
       type: Schema.Types.ObjectId,

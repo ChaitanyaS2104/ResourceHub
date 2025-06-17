@@ -11,10 +11,6 @@ const Form = ({ handleSubmit, book, setBook, submitting, btntype, all_resources,
   const [show, setShow] = useState(false);
   const [type, setType] = useState(false);
 
-  useEffect(() => {
-    console.log(book);
-  }, [book]);
-
   return (
     <>
       <section className="w-full max-w-full flex-start flex-col">

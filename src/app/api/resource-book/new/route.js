@@ -24,6 +24,6 @@ export const POST = async (req) => {
 
     return new Response(JSON.stringify(newBook), { status: 201 });
   } catch (error) {
-        return new Response(JSON.stringify(error.message), {status: 400,});
+        return new Response(JSON.stringify(error.message), {status: 400});
   }
 };

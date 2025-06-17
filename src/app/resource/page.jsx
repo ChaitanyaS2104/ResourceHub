@@ -74,7 +74,7 @@ const ResourceDetails = () => {
         </div>
       </div>
 
-      <p className="text-gray-700 mb-5">{book.description}</p>
+      <p className="text-gray-700 mb-5 text-left w-full">{book.description}</p>
 
       <div className="mb-3 flex flex-col gap-3">
         {resources.map((res) => {

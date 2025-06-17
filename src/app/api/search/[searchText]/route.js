@@ -7,12 +7,13 @@ export const GET = async (req, { params }) => {
   try {
     await connectToDB();
 
-    // 1. Find books by title, description, or collection
+    // 1. Find books by title, description, category or collection
     const booksByFields = await ResourceBook.find({
       $or: [
         { title: { $regex: searchText, $options: "i" } },
         { description: { $regex: searchText, $options: "i" } },
         { collection: { $regex: searchText, $options: "i" } },
+        { category: { $in: [new RegExp(searchText, "i")] } }, // <-- new line added
       ],
     }).populate("creator");
 

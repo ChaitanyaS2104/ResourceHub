@@ -58,7 +58,7 @@ export const DELETE = async (req, { params }) => {
 
     // Step 3: Delete the book
     await ResourceBook.findByIdAndDelete(bookid);
-    return new Response(JSON.stringify(book), { status: 200 });
+    return new Response(JSON.stringify("Deleted"), { status: 200 });
   } catch (error) {
     return new Response(`Error in deleting book of id ${bookid}: ${error}`);
   }

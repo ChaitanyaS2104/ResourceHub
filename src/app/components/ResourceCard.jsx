@@ -8,11 +8,13 @@ const ResourceCard = ({
   res_book,
   handleEdit,
   handleDelete,
-  handleBookClick,
+  handleTagClick,
+  handleUsernameClick,
 }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
+  const handleBookClick = (book) => router.push(`/resource?id=${book}`);
   return (
     <div className="prompt_card flex flex-col gap-4 my-3">
       <div className="border-b-1 border-[#c7c7c7]">
@@ -32,16 +34,16 @@ const ResourceCard = ({
       <div className="flex gap-1.5">
         {res_book.category.map((category) => (
           <div
-            className="text-xs rounded-full px-3 py-0.5 bg-gray-200"
+            className="text-xs rounded-full px-3 py-0.5 bg-gray-200 cursor-pointer"
             key={category}
+            onClick={() => handleTagClick(category)}
           >
             <span className="blue_gradient"># {category}</span>
           </div>
         ))}
       </div>
-
-      <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+     
+        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer" onClick={()=> handleUsernameClick(res_book.creator.email)}>
           <Image
             src={res_book.creator.image}
             alt="user image"
@@ -58,7 +60,6 @@ const ResourceCard = ({
             </p>
           </div>
         </div>
-      </div>
 
       {session?.user.id == res_book.creator._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">

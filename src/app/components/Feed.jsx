@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import ResourceCard from "./ResourceCard";
 import { useState, useEffect, useRef } from "react";
 
-const ResourceCardList = ({ data, handleBookClick }) => {
+const ResourceCardList = ({ data, handleTagClick, handleUsernameClick}) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((res_book) => {
@@ -11,7 +11,8 @@ const ResourceCardList = ({ data, handleBookClick }) => {
           <ResourceCard
             key={res_book.title}
             res_book={res_book}
-            handleBookClick={handleBookClick}
+            handleTagClick = {handleTagClick}
+            handleUsernameClick = {handleUsernameClick}
           />
         );
       })}
@@ -56,8 +57,18 @@ const Feed = () => {
     fetchBook();
   }, []);
 
-  const handleBookClick = (book) => router.push(`/resource?id=${book}`);
+  const handleTagClick = (cat) => {
+    clearTimeout(searchTimeout.current);
+    setSearchText(cat);
+    searchTimeout.current = setTimeout(async () => {
+      const searchResults = await fetchSearch(cat);
+      setBooks(searchResults);
+    }, 500);
+  }
 
+  const handleUsernameClick = (useremail)=>{
+    router.push(`/userprofile?email=${useremail}`);
+  }
   return (
     <section className="feed">
       <form action="" className="relative w-full flex-center">
@@ -72,7 +83,7 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      <ResourceCardList data={books} handleBookClick={handleBookClick} />
+      <ResourceCardList data={books} handleTagClick={handleTagClick} handleUsernameClick={handleUsernameClick}/>
     </section>
   );
 };

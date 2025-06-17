@@ -1,7 +1,7 @@
-import VideoLinkPreview from "./not used/VideoLinkPreview";
-import AudioPreview from "./not used/AudioPreview";
-import WebPreview from "./not used/WebPreview";
-import ContactPreview from "./not used/ContactPreview";
+import VideoLinkPreview from "./Previews/VideoLinkPreview";
+import AudioPreview from "./Previews/AudioPreview";
+import WebPreview from "./Previews/WebPreview";
+import ContactPreview from "./Previews/ContactPreview";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
@@ -34,7 +34,7 @@ const SingleResCard = ({ res, onDelete }) => {
         <p className="text-xs text-gray-700 font-semibold">{res.res_owner}</p>
         <p className="text-xs text-gray-600">Type: {res.res_type}</p>
       </div>
-      {pathname == "/create-resourceBook" && (
+      {(pathname == "/create-resourceBook" || pathname == "/update-book") && (
       <button
         onClick={onDelete}
         className="h-8 px-3 text-sm text-white rounded-full orange_gradient border-1 border-amber-600 cursor-pointer hover:scale-[1.04]"

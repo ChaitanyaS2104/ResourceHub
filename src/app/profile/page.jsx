@@ -45,7 +45,7 @@ const page = () => {
   };
   return (
     <Profile
-      name="My"
+      name="My Profile"
       desc="Welcome to your personalised profile page"
       data={books}
       handleEdit={handleEdit}
