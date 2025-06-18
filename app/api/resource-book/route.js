@@ -1,5 +1,5 @@
-import { connectToDB } from "../../../utils/database";
-import ResourceBook from "../../../models/resource_book";
+import { connectToDB } from "@utils/database";
+import ResourceBook from "@models/resource_book";
 
 //Get all the resource-books
 export const GET = async(req) => {

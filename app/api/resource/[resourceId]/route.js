@@ -1,5 +1,5 @@
-import { connectToDB } from "../../../../utils/database";
-import Resource from "../../../../models/resource";
+import { connectToDB } from "@utils/database";
+import Resource from "@models/resource";
 
 //Get all the resources
 export const GET = async (request, { params }) => {

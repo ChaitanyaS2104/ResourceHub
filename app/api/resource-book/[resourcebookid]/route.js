@@ -1,7 +1,7 @@
-import { connectToDB } from "../../../../utils/database";
-import Resource from "../../../../models/resource";
-import ResourceBook from "../../../../models/resource_book";
-import User from "../../../../models/user";
+import { connectToDB } from "@utils/database";
+import Resource from "@models/resource";
+import ResourceBook from "@models/resource_book";
+import User from "@models/user";
 
 //GET the resource with resource id
 export const GET = async (request, { params }) => {

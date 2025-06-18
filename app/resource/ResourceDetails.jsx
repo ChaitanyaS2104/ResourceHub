@@ -2,7 +2,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import SingleResCard from "../../components/SingleResCard";
+import SingleResCard from "@components/SingleResCard";
 
 const ResourceDetails = () => {
   const router = useRouter();

@@ -1,6 +1,6 @@
-import { connectToDB } from "../../../../utils/database";
-import ResourceBook from "../../../../models/resource_book";
-import User from "../../../../models/user";
+import { connectToDB } from "@utils/database";
+import ResourceBook from "@models/resource_book";
+import User from "@models/user";
 
 export const GET = async (req, { params }) => {
   const searchText = params.searchText;

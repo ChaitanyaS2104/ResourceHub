@@ -1,5 +1,5 @@
 "use client";
-import Profile from "../../../components/Profile";
+import Profile from "@components/Profile";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 

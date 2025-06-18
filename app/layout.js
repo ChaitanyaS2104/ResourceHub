@@ -1,8 +1,6 @@
-import "./styles/globals.css";
-import Provider from "../components/Provider";
-import Navbar from "../components/Navbar";
-
-import { getServerSession } from "next-auth/next";
+import "@styles/globals.css";
+import Provider from "@components/Provider";
+import Navbar from "@components/Navbar";
 
 export const metadata = {
   title: "ResourceHub",

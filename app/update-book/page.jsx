@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import Form from "../../components/Form";
+import Form from "@components/Form";
 const EditResourceBook = () => {
   //Array to store all the resource data until form is submitted for showing
   const [all_resources, setAll_resources] = useState([]);

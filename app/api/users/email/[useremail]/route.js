@@ -1,5 +1,5 @@
-import { connectToDB } from "../../../../../utils/database";
-import User from "../../../../../models/user"
+import { connectToDB } from "@utils/database";
+import User from "@models/user"
 
 //Get the user id from the email
 export const GET = async (request, { params }) => {

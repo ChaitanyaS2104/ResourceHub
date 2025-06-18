@@ -1,5 +1,5 @@
-import { connectToDB } from "../../../../utils/database";
-import ResourceBook from "../../../../models/resource_book";
+import { connectToDB } from "@utils/database";
+import ResourceBook from "@models/resource_book";
 
 //Store new resource book
 export const POST = async (req) => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-import Form from "../../components/Form";
+import Form from "@components/Form";
 const CreateResoourceBook = () => {
   //Array to store all the resource data until form is submitted for showing
   const [all_resources, setAll_resources] = useState([]);
