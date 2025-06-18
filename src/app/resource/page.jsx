@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import SingleResCard from "@app/components/SingleResCard";
 
@@ -48,7 +48,8 @@ const ResourceDetails = () => {
   }, [book]);
 
   return (
-    <div className="mx-auto p-6 shadow-lg rounded-xl flex flex-col items-center justify-center bg-white">
+    <Suspense fallback={<div>Loading...</div>}>
+ <div className="mx-auto p-6 shadow-lg rounded-xl flex flex-col items-center justify-center bg-white">
       <button
         className="mb-4 text-blue-600 hover:underline text-left w-full cursor-pointer"
         onClick={() => {
@@ -95,6 +96,8 @@ const ResourceDetails = () => {
         </div>
       </div>
     </div>
+    </Suspense>
+   
   );
 };
 
