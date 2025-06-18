@@ -1,13 +1,13 @@
 "use client";
 import Profile from "@app/components/Profile";
-import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 
 const Page = () => {
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState({});
-  const searchParams = useSearchParams();
-  const useremail = searchParams.get("email");
+  const params = useParams();
+  const useremail = params.user;
 
   useEffect(() => {
     if (!useremail) return;

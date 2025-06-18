@@ -67,7 +67,7 @@ const Feed = () => {
   }
 
   const handleUsernameClick = (useremail)=>{
-    router.push(`/userprofile?email=${useremail}`);
+    router.push(`/profile/${useremail}`);
   }
   return (
     <section className="feed">
