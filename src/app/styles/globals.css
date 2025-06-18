@@ -113,12 +113,6 @@ nav {
   }
 }
 
-.orange_gradient {
-  background: linear-gradient(to right, #f59e0b, #ea580c, #facc15);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .green_gradient {
   background: linear-gradient(to right, #4ade80, #22c55e);
   -webkit-background-clip: text;
@@ -161,19 +155,6 @@ nav {
 .search_input:focus {
   border-color: black;
   box-shadow: none;
-}
-
-.copy_btn {
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  box-shadow: inset 10px -50px 94px rgba(199, 199, 199, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
 }
 
 .glassmorphism {
@@ -347,13 +328,13 @@ nav {
 
 @media (max-width: 974px) {
   .glassmorphism_btn {
-  padding: 16px;
-  border-radius: 0.75rem;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  box-shadow: inset 10px -50px 94px rgba(199, 199, 199, 0.2);
+    padding: 16px;
+    border-radius: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 10px -50px 94px rgba(199, 199, 199, 0.2);
+  }
 }
-}
-.resource_preview{
+.resource_preview {
   border: 1px solid #c7c7c7;
 }

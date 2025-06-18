@@ -22,10 +22,6 @@ const resource_book = new Schema(
         default: [],
       },
     ],
-    fromCollection: {
-      type: [String],
-      default: [],
-    },
     creator: {
       type: Schema.Types.ObjectId,
       ref: "User", //From user model

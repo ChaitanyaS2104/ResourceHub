@@ -18,7 +18,6 @@ const EditResourceBook = () => {
     description: "",
     category: [],
     resources: [],
-    fromCollection: [],
   });
   const [isEdit, setIsEdit] = useState(false);
 
@@ -31,7 +30,6 @@ const EditResourceBook = () => {
         description: data.description,
         category: data.category,
         resources: data.resources,
-        fromCollection: data.fromCollection,
       });
       setOriginalResourceIds(data.resources);
       setIsEdit(true);
@@ -109,7 +107,6 @@ const EditResourceBook = () => {
           description: book.description,
           category: book.category,
           resources: finalIds,
-          fromCollection: book.fromCollection,
         }),
       });
 

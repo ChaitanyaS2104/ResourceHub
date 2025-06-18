@@ -17,12 +17,11 @@ export const GET = async (request, { params }) => {
     return new Response(`Error in geting book of id ${id}: ${error}`);
   }
 };
-
+//Update the resource with resource id
 export const PATCH = async (req, { params }) => {
   const data = await params;
   const id = await data.resourcebookid;
-  const { title, description, category, resources, fromCollection } =
-    await req.json();
+  const { title, description, category, resources } = await req.json();
   try {
     await connectToDB();
     const existingbook = await ResourceBook.findById(id);
@@ -32,14 +31,13 @@ export const PATCH = async (req, { params }) => {
     existingbook.description = description;
     existingbook.category = category;
     existingbook.resources = resources;
-    existingbook.fromCollection = fromCollection;
     await existingbook.save();
     return new Response(JSON.stringify(existingbook), { status: 200 });
   } catch (error) {
     return new Response(`Error in updating book of id ${id}: ${error}`);
   }
 };
-
+//Delete resource with id
 export const DELETE = async (req, { params }) => {
   const data = await params;
   const bookid = await data.resourcebookid;
@@ -49,13 +47,10 @@ export const DELETE = async (req, { params }) => {
     // Step 1: Find the resources and get the ids
     const book = await ResourceBook.findById(bookid);
     const res_ids = book.resources;
-    console.log(res_ids);
-
     if (res_ids.length != 0) {
       // Step 2: Delete the resources
       await Resource.deleteMany({ _id: { $in: res_ids } });
     }
-
     // Step 3: Delete the book
     await ResourceBook.findByIdAndDelete(bookid);
     return new Response(JSON.stringify("Deleted"), { status: 200 });

@@ -1,6 +1,7 @@
 import { connectToDB } from "@app/utils/database";
 import Resource from "@models/resource";
 
+//Store a single resource
 export const POST = async (req) => {
   const { res_name, res_link, description, res_owner, res_type } =
     await req.json();

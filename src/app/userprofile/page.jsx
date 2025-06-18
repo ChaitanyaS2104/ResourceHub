@@ -35,7 +35,9 @@ const Page = () => {
   return (
     <Profile
       name={user?.username || "User"}
-      desc={`Welcome to ${user?.username || "user"}'s profile page — discover their interests, explore their collections, and see what they've been sharing.`}
+      desc={`Welcome to ${
+        user?.username || "user"
+      }'s profile page — discover their interests, explore their collections, and see what they've been sharing.`}
       data={books}
     />
   );

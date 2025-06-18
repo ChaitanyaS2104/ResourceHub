@@ -1,11 +1,9 @@
-import React from 'react'
 import Image from 'next/image'
-
 const ContactPreview = () => {
   return (
     <div className="rounded-lg shadow-md w-2xs glassmorphism object-contain flex justify-center">
       <Image
-      src={`/assets/icons/contact.png`} // Placeholder image, replace with actual URL if needed
+      src={`/assets/icons/contact.png`}
       alt="Contact Preview"
       width={140}
       height={100}
@@ -13,5 +11,4 @@ const ContactPreview = () => {
     </div>
   )
 }
-
 export default ContactPreview

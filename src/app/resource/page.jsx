@@ -12,7 +12,6 @@ const ResourceDetails = () => {
     title: "",
     description: "",
     category: [],
-    collection: [],
     creator: {
       username: "",
       email: "",
@@ -49,7 +48,7 @@ const ResourceDetails = () => {
   }, [book]);
 
   return (
-    <div className="mx-auto p-4 shadow-lg rounded-xl flex flex-col  items-center justify-center">
+    <div className="mx-auto p-6 shadow-lg rounded-xl flex flex-col items-center justify-center bg-white">
       <button
         className="mb-4 text-blue-600 hover:underline text-left w-full cursor-pointer"
         onClick={() => {
@@ -76,30 +75,13 @@ const ResourceDetails = () => {
 
       <p className="text-gray-700 mb-5 text-left w-full">{book.description}</p>
 
-      <div className="mb-3 flex flex-col gap-3">
+      <div className="mb-4 mt-3 flex flex-col gap-3 items-start w-full">
         {resources.map((res) => {
           return <SingleResCard key={res.res_name} res={res} />;
         })}
       </div>
 
-
-      {book.collection?.length > 0 && (
-        <div className="mb-3">
-          <strong className="text-gray-600">Collections:</strong>
-          <div className="flex gap-2 mt-1 flex-wrap">
-            {book.collection.map((col) => (
-              <span
-                key={col}
-                className="text-xs bg-purple-200 px-2 py-0.5 rounded-full text-purple-800"
-              >
-                📚 {col}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="flex items-center gap-3 mt-4">
+      <div className="flex items-center gap-3 mt-4 w-full">
         <Image
           src={book.creator.image}
           alt="Creator Image"

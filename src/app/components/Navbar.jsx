@@ -1,4 +1,3 @@
-//To use react
 "use client";
 //Optimize image
 import Image from "next/image";

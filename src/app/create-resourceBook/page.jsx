@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -16,7 +16,6 @@ const CreateResoourceBook = () => {
     description: "",
     category: [],
     resources: [],
-    fromCollection: "",
   });
 
   const postResource = async (all) => {
@@ -54,7 +53,6 @@ const CreateResoourceBook = () => {
           description: book.description,
           category: book.category,
           resources: ids,
-          fromCollection: book.fromCollection,
           creator: session?.user.id,
         }),
       });

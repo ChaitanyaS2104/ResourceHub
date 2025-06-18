@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
@@ -42,24 +41,27 @@ const ResourceCard = ({
           </div>
         ))}
       </div>
-     
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer" onClick={()=> handleUsernameClick(res_book.creator.email)}>
-          <Image
-            src={res_book.creator.image}
-            alt="user image"
-            width={30}
-            height={30}
-            className="rounded-full object-contain"
-          />
-          <div className="flex flex-col">
-            <h3 className="font-satoshi font-semibold text-gray-900 text-sm">
-              {res_book.creator.username}
-            </h3>
-            <p className="font-inter text-xs text-gray-500">
-              {res_book.creator.email}
-            </p>
-          </div>
+
+      <div
+        className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+        onClick={() => handleUsernameClick(res_book.creator.email)}
+      >
+        <Image
+          src={res_book.creator.image}
+          alt="user image"
+          width={30}
+          height={30}
+          className="rounded-full object-contain"
+        />
+        <div className="flex flex-col">
+          <h3 className="font-satoshi font-semibold text-gray-900 text-sm">
+            {res_book.creator.username}
+          </h3>
+          <p className="font-inter text-xs text-gray-500">
+            {res_book.creator.email}
+          </p>
         </div>
+      </div>
 
       {session?.user.id == res_book.creator._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">

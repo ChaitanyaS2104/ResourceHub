@@ -1,9 +1,8 @@
 "use client";
 import Tagselector from "./Tagselector";
 import Uploader from "./Uploader";
-import CollectionSelector from "./CollectionSelector";
 import UploaderForm from "./UploaderForm";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import SingleResCard from "./SingleResCard"
 
@@ -59,12 +58,6 @@ const Form = ({ handleSubmit, book, setBook, submitting, btntype, all_resources,
                 Category -
               </span>
               <Tagselector setCategory={setBook} book={book} isEdit={isEdit}/>
-            </label>
-            <label className="flex gap-2 items-center">
-              <span className="font-semibold text-base text-gray-700 text-nowrap">
-                Collection -
-              </span>
-              <CollectionSelector setCollection={setBook} book={book} isEdit={isEdit}/>
             </label>
 
             <div className="flex-end mx-3 mb-5 gap-4">

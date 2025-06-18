@@ -2,14 +2,13 @@ import VideoLinkPreview from "./Previews/VideoLinkPreview";
 import AudioPreview from "./Previews/AudioPreview";
 import WebPreview from "./Previews/WebPreview";
 import ContactPreview from "./Previews/ContactPreview";
-import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
 //To show the currently uploaded resources
 const SingleResCard = ({ res, onDelete }) => {
   const pathname = usePathname();
   return (
-    <div className="flex justify-between items-start p-3 shadow rounded-lg bg-white max-w-4xl position-relative gap-3 md:flex-row flex-col">
+    <div className="flex justify-between items-start p-3 shadow rounded-lg glassmorphism max-w-4xl position-relative gap-3 md:flex-row flex-col w-full">
       <div className="self-center max-w-2xs">
         {res.res_type == "video" && <VideoLinkPreview url={res.res_link} />}
         {res.res_type == "audio / podcast" && (

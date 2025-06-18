@@ -1,7 +1,7 @@
 import { connectToDB } from "@app/utils/database";
 import User from "@models/user"
 
-//Get the resource book with user id
+//Get the user id from the email
 export const GET = async (request, { params }) => {
   const data = await params;
   const useremail = await data.useremail;

@@ -1,7 +1,4 @@
-'use client'
-import { useEffect } from "react"; 
-
-
+"use client";
 function getEmbedInfo(url) {
   // YouTube
   const ytMatch = url.match(
@@ -13,7 +10,6 @@ function getEmbedInfo(url) {
       embedUrl: `https://www.youtube.com/embed/${ytMatch[1]}`,
     };
   }
-
   // Vimeo
   const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
   if (vimeoMatch) {
@@ -22,7 +18,6 @@ function getEmbedInfo(url) {
       embedUrl: `https://player.vimeo.com/video/${vimeoMatch[1]}`,
     };
   }
-
   // Facebook (must be public)
   const isFacebook = url.includes("facebook.com") && url.includes("/videos/");
   if (isFacebook) {
@@ -32,7 +27,6 @@ function getEmbedInfo(url) {
       embedUrl: `https://www.facebook.com/plugins/video.php?href=${encoded}`,
     };
   }
-
   // Unsupported
   return {
     platform: "unsupported",
@@ -69,6 +63,5 @@ const VideoLinkPreview = ({ url }) => {
       )}
     </div>
   );
-}
-
+};
 export default VideoLinkPreview;
